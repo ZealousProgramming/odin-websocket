@@ -1,0 +1,1 @@
+{"version": "0.2.0","configurations": [{"name": "Odin Debug","type": "cppvsdbg","request": "launch","program": "./bin/odin-websocket.exe","args": [],"stopAtEntry": false, "cwd": "${workspaceFolder}", "environment": [], "preLaunchTask": "build" }]}
