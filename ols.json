@@ -1,1 +1,28 @@
-{"collections": [{"name": "core","path": "C:\\programming\\odin\\Odin\\core"},{"name": "vendor","path": "C:\\programming\\odin\\Odin\\vendor"}],"enable_document_symbols": true, "enable_semantic_tokens": true, "enable_inlay_hints": true, "enable_procedure_snippet": true, "enable_hover": true, "enable_snippets": true, "enable_format": true, "formatter": { "tabs": true, "tabs_width": 4, "character_width": 80 }}
+{
+		"collections": [
+				{
+						"name": "core",
+						"path": "C:\\programming\\odin\\Odin\\core"
+				},
+				{
+						"name": "vendor",
+						"path": "C:\\programming\\odin\\Odin\\vendor"
+				},
+				{
+						"name": "shared",
+						"path": "C:\\programming\\odin\\Odin\\shared"
+				}
+		],
+		"enable_document_symbols": true, 
+		"enable_semantic_tokens": true, 
+		"enable_inlay_hints": true, 
+		"enable_procedure_snippet": true, 
+		"enable_hover": true, 
+		"enable_snippets": true, 
+		"enable_format": true, 
+		"formatter": { 
+				"tabs": true, 
+				"tabs_width": 4, 
+				"character_width": 80 
+		}
+}

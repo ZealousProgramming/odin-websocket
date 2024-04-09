@@ -1,2 +1,2 @@
 @ECHO OFF
-odin run . -file -out:./bin/odin-websocket.exe -debug
+odin run . -file -out:./bin/websocket.exe -debug

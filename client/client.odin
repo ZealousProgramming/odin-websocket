@@ -6,14 +6,14 @@ import "core:fmt"
 import "core:net"
 import "core:strings"
 
-ENDPOINT :: "127.0.0.1:3000"
+SERVER_ENDPOINT :: "127.0.0.1:80"
 
 INITIAL_MESSAGE :: "pong"
 
 main :: proc() {
-	fmt.printf("[odin-websocket] Connecting to %s..\n", ENDPOINT)
+	fmt.printf("[odin-websocket] Connecting to %s..\n", SERVER_ENDPOINT)
 
-	socket, err := net.dial_tcp(ENDPOINT)
+	socket, err := net.dial_tcp(SERVER_ENDPOINT)
 	fmt.assertf(err == nil, "dial error %v", err)
 	defer net.close(socket)
 
