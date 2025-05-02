@@ -2,7 +2,7 @@ package websocket_tests
 
 import "core:testing"
 
-import http "shared:odin-http"
+// import http "shared:odin-http"
 
 import websocket "../"
 
@@ -19,9 +19,9 @@ test_challenge_key :: proc(t: ^testing.T) {
 
 @(test)
 test_client :: proc(t: ^testing.T) {
-	headers := websocket.WebSocketHeaders{}
-	http.headers_init(&headers)
-	http.headers_set(&headers, "", "")
+	// headers := websocket.WebSocketHeaders{}
+	// http.headers_init(&headers)
+	// http.headers_set(&headers, "", "")
 
 	client := websocket.client_init(nil)
 	testing.expect(t, client != nil)

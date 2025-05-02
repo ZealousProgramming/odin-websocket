@@ -1,53 +1,33 @@
 package websocket
 
 import "core:fmt"
-import "core:net"
-
-ADDRESS: net.IP4_Address : net.IP4_Address{127, 0, 0, 1}
-PORT :: 8573
-ENDPOINT :: "127.0.0.1:3000"
-
-INITIAL_MESSAGE :: "Hellolove"
+import "core:log"
+import "core:mem"
 
 main :: proc() {
-	fmt.println("[odin-websocket] Hello from the otherside")
+	mem.tracking_allocator_init(&track, context.allocator)
+	context.allocator = mem.tracking_allocator(&track)
+	context.logger = log.create_console_logger(log.Level.Info)
 
-	endpoint, endpoint_err := net.parse_endpoint(ENDPOINT)
-	if endpoint_err {
-		fmt.eprintln("NETWORK ERROR: Failed to parse endpoints")
+	c_err := ws_client_connect()
+
+	if c_err != .Nil {
+		log.errorf("Failed to connect to server: %v\n", c_err)
 	}
 
-	tcp_socket, listen_err := net.listen_tcp(endpoint)
-	if listen_err != nil {
-		fmt.eprintf("NETWORK ERROR: Failed to listen - %s\n", listen_err)
+	log.destroy_console_logger(context.logger)
+	for _, leak in track.allocation_map {
+		fmt.eprintf("%v leaked %v bytes\n", leak.location, leak.size)
 	}
 
-	buffer: [len(INITIAL_MESSAGE)]u8
-	copy(buffer[:], INITIAL_MESSAGE)
-
-	for {
-		connection, _, accept_err := net.accept_tcp(tcp_socket)
-		if accept_err != nil {
-			fmt.eprintf(
-				"NETWORK ERROR: Failed to accept incoming connection - %s\n",
-				accept_err,
-			)
-		} else {
-			fmt.println("Incoming Connection: %v", connection)
-		}
-
-		bytes_written, send_err := net.send_tcp(tcp_socket, buffer[:])
-		if send_err != nil {
-			fmt.eprintf(
-				"NETWORK ERROR: Failed to send message - %s\n",
-				accept_err,
-			)
-
-			return
-		} else {
-			fmt.println("Incoming Connection: %v", connection)
-		}
+	for bad_free in track.bad_free_array {
+		fmt.eprintf(
+			"%p allocation %p was freed incorrectly\n",
+			bad_free.location,
+			bad_free.memory,
+		)
 	}
 
 }
 
+track: mem.Tracking_Allocator
