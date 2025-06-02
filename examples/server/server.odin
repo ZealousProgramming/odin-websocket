@@ -28,20 +28,14 @@ main :: proc() {
 	for {
 		connection, _, accept_err := net.accept_tcp(socket)
 		if accept_err != nil {
-			fmt.eprintf(
-				"NETWORK ERROR: Failed to accept incoming connection - %s\n",
-				accept_err,
-			)
+			fmt.eprintf("NETWORK ERROR: Failed to accept incoming connection - %s\n", accept_err)
 		} else {
 			fmt.printf("Incoming Connection: %v\n", connection)
 		}
 
 		bytes_written, send_err := net.send_tcp(connection, buffer[:])
 		if send_err != nil {
-			fmt.eprintf(
-				"NETWORK ERROR: Failed to send message - %s\n",
-				accept_err,
-			)
+			fmt.eprintf("NETWORK ERROR: Failed to send message - %s\n", accept_err)
 			return
 		} else {
 			fmt.printf("Bytes Sent: %v\n", bytes_written)
@@ -57,15 +51,9 @@ main :: proc() {
 		if (received > 0) {
 			fmt.println("Received message of length:", received)
 
-			message, alloc_err := strings.clone_from_bytes(
-				buffer[:],
-				context.temp_allocator,
-			)
+			message, alloc_err := strings.clone_from_bytes(buffer[:], context.temp_allocator)
 			if alloc_err != nil {
-				fmt.eprintf(
-					"Failed to convert bytes to string: %v\n",
-					alloc_err,
-				)
+				fmt.eprintf("Failed to convert bytes to string: %v\n", alloc_err)
 				return
 			} else {
 				fmt.println("Received message with content:", message)

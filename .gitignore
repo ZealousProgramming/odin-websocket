@@ -1,3 +1,9 @@
+/bin
+*.bin
+*.sublime-project
+bin/build
+bin/odin-websocket
+
 # Prerequisites
 *.d
 
@@ -50,3 +56,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+

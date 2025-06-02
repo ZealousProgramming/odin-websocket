@@ -1,1 +1,1 @@
-{"version": "2.0.0","tasks": [{"label": "build","type": "shell","command": "./build.bat","group": {"kind": "build","isDefault": true},"problemMatcher": ["$gcc"]}]}
+{"version": "2.0.0","tasks": [{"label": "build","type": "shell","command": "odin build . -out:./bin/odin-websocket -debug","group": {"kind": "build","isDefault": true},"problemMatcher": []}]}
